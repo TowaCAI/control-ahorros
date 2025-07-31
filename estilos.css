@@ -1,0 +1,605 @@
+/* -------------------------------------- */
+/* RESET Y CONFIGURACIÓN BÁSICA           */
+/* -------------------------------------- */
+
+/* Reset universal de márgenes, paddings y box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* -------------------------------------- */
+/* CONTENEDOR PRINCIPAL                   */
+/* -------------------------------------- */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* -------------------------------------- */
+/* HEADER                                */
+/* -------------------------------------- */
+
+.header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* -------------------------------------- */
+/* TARJETAS DE RESUMEN                    */
+/* -------------------------------------- */
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-left: 5px solid;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Colores para tipos de tarjeta */
+.card.ingresos { border-left-color: #27ae60; }
+.card.egresos { border-left-color: #e74c3c; }
+.card.inversiones { border-left-color: #3498db; }
+.card.patrimonio { border-left-color: #f39c12; }
+
+/* Títulos de tarjeta */
+.card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+/* Monto destacado */
+.card .amount {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Colores según tipo de monto */
+.card.ingresos .amount { color: #27ae60; }
+.card.egresos .amount { color: #e74c3c; }
+.card.inversiones .amount { color: #3498db; }
+.card.patrimonio .amount { color: #f39c12; }
+
+/* -------------------------------------- */
+/* TABS PRINCIPALES                       */
+/* -------------------------------------- */
+
+.tabs {
+    display: flex;
+    background: #ecf0f1;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #7f8c8d;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+    background: white;
+    color: #2c3e50;
+    border-bottom-color: #3498db;
+}
+
+.tab:hover {
+    background: #d5dbdb;
+}
+
+/* -------------------------------------- */
+/* CONTENIDO PRINCIPAL Y SECCIONES        */
+/* -------------------------------------- */
+
+.content {
+    padding: 30px;
+    min-height: 600px;
+}
+
+/* Secciones del contenido */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* -------------------------------------- */
+/* FORMULARIOS Y GRID DE FORMULARIO       */
+/* -------------------------------------- */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Grupo de campos de formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* -------------------------------------- */
+/* BOTONES                               */
+/* -------------------------------------- */
+
+.btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+}
+
+/* Botón de éxito */
+.btn-success {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}
+
+/* Botón de peligro */
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* -------------------------------------- */
+/* TABLAS Y CONTENEDOR DE TABLAS          */
+/* -------------------------------------- */
+
+.table-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+/* Indicadores de positivo/negativo */
+.positive { color: #27ae60; font-weight: 600; }
+.negative { color: #e74c3c; font-weight: 600; }
+
+/* Botón para eliminar en tablas */
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+/* -------------------------------------- */
+/* GRÁFICOS Y TARJETAS DE INVERSIÓN       */
+/* -------------------------------------- */
+
+.chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Tarjeta de inversión (inversiones detalladas) */
+.investment-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border-left: 5px solid;
+}
+
+/* Colores según tipo de inversión */
+.investment-card.acciones { border-left-color: #e67e22; }
+.investment-card.bonos { border-left-color: #9b59b6; }
+.investment-card.plazo-fijo { border-left-color: #1abc9c; }
+.investment-card.dolares { border-left-color: #f1c40f; }
+
+/* -------------------------------------- */
+/* MEDIA QUERIES - RESPONSIVE             */
+/* -------------------------------------- */
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    .tabs {
+        flex-direction: column;
+    }
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 8px 6px;
+    }
+}
+
+/* -------------------------------------- */
+/* TABS DE REPORTES Y GRÁFICOS            */
+/* -------------------------------------- */
+
+/* Tabs para reportes */
+.report-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.report-tab {
+    flex: 1;
+    padding: 12px 0;
+    background: #ecf0f1;
+    border: none;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #34495e;
+    border-bottom: 3px solid transparent;
+    transition: 0.2s;
+}
+
+.report-tab.active,
+.report-tab:hover {
+    background: #fff;
+    color: #2980b9;
+    border-bottom: 3px solid #2980b9;
+}
+
+/* Contenedor principal del reporte */
+#report-content {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 6px rgba(52,152,219,0.07);
+    padding: 22px 12px 15px 12px;
+    min-height: 210px;
+}
+
+/* Tabla de reportes */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+}
+
+.report-table th,
+.report-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ececec;
+    text-align: left;
+}
+
+.report-table th {
+    text-align: left;
+    background: #f8f9fa;
+    font-weight: 700;
+    color: #2980b9;
+}
+
+.report-highlight {
+    background: #dff9fb;
+    font-weight: 600;
+}
+
+/* Tabs para gráficos */
+.graphics-tabs {
+    display: flex;
+    margin-bottom: 12px;
+    gap: 6px;
+}
+
+.graphics-tab {
+    flex: 1;
+    padding: 10px 0;
+    background: #ecf0f1;
+    border: none;
+    border-radius: 7px 7px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2980b9;
+    border-bottom: 3px solid transparent;
+    transition: 0.15s;
+}
+
+.graphics-tab.active,
+.graphics-tab:hover {
+    background: #fff;
+    color: #34495e;
+    border-bottom: 3px solid #34495e;
+}
+
+/* Contenido de gráficos */
+#graphics-content {
+    min-height: 260px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* -------------------------------------- */
+/* BÚSQUEDA EN TABLAS                     */
+/* -------------------------------------- */
+
+.table-search {
+    margin: 10px 0 5px 0;
+}
+
+.table-search input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 7px;
+    border: 2px solid #ecf0f1;
+    font-size: 16px;
+    margin-bottom: 3px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.table-search input[type="text"]:focus {
+    border-color: #2980b9;
+}
+
+/* -------------------------------------- */
+/* MODO OSCURO                            */
+/* -------------------------------------- */
+
+/* Estilos generales para dark mode */
+body.dark,
+body.dark .container {
+    background: #191b1e !important;
+    color: #f1f1f1 !important;
+}
+
+/* Contenedor principal en modo oscuro */
+body.dark .container {
+    background: #23252a !important;
+}
+
+/* Header en modo oscuro */
+body.dark .header {
+    background: linear-gradient(135deg, #181d21, #202d39) !important;
+    color: #f5f6fa !important;
+}
+
+/* Fondos y textos de secciones en modo oscuro */
+body.dark .summary-cards,
+body.dark .tabs,
+body.dark .form-group label,
+body.dark .table-container,
+body.dark .content,
+body.dark .investment-card,
+body.dark .report-tabs,
+body.dark .report-table,
+body.dark .graphics-tabs,
+body.dark #graphics-content,
+body.dark #report-content,
+body.dark .table-search input[type="text"] {
+    background: #242731 !important;
+    color: #f1f1f1 !important;
+    border-color: #323644 !important;
+}
+
+/* Tablas en modo oscuro */
+body.dark table,
+body.dark .report-table th,
+body.dark .report-table td {
+    background: #242731 !important;
+    color: #eee !important;
+    border-color: #31333a !important;
+}
+
+/* Botones en modo oscuro */
+body.dark .btn,
+body.dark .btn-success,
+body.dark .btn-danger,
+body.dark .delete-btn,
+body.dark .graphics-tab,
+body.dark .report-tab {
+    background: linear-gradient(135deg, #31344b, #273059) !important;
+    color: #fff !important;
+    border-color: #434862 !important;
+}
+
+/* Hover de botones en modo oscuro */
+body.dark .btn:hover,
+body.dark .btn-success:hover,
+body.dark .btn-danger:hover,
+body.dark .delete-btn:hover {
+    background: linear-gradient(135deg, #434862, #2c364d) !important;
+}
+
+/* Inputs en modo oscuro */
+body.dark input,
+body.dark select,
+body.dark .form-group input,
+body.dark .form-group select {
+    background: #292c34 !important;
+    color: #f1f1f1 !important;
+    border-color: #31333a !important;
+}
+
+/* Colores positivos y negativos en modo oscuro */
+body.dark .positive { color: #37d67a !important; }
+body.dark .negative { color: #ff6868 !important; }
+
+/* Cards y gráficos en modo oscuro */
+body.dark .card,
+body.dark .investment-card,
+body.dark .chart-container {
+    background: #22252b !important;
+    color: #f3f3f3 !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+}
+
+/* Montos destacados en modo oscuro */
+body.dark .card .amount,
+body.dark .amount {
+    color: #fff !important;
+    text-shadow: 0 1px 2px #222a38bb;
+}
+
+/* Hover de tarjetas en modo oscuro */
+body.dark .card:hover {
+    background: #282b33 !important;
+    color: #fff !important;
+    /* Sombra más fuerte */
+}
+
+/* Colores de textos en tarjetas en modo oscuro */
+body.dark .card p,
+body.dark .investment-card p,
+body.dark .card h3,
+body.dark .investment-card h3 {
+    color: #cfcfcf !important;
+}
+
+/* Colores específicos de montos según tipo en modo oscuro */
+body.dark .summary-cards .card.ingresos .amount { color: #38ec9a !important; }
+body.dark .summary-cards .card.egresos .amount { color: #ff7979 !important; }
+body.dark .summary-cards .card.inversiones .amount { color: #76a9fa !important; }
+body.dark .summary-cards .card.patrimonio .amount { color: #ffe082 !important; }
+
+/* Montos en tarjetas al hacer hover en modo oscuro */
+body.dark .card:hover .amount,
+body.dark .card .amount {
+    color: #fff !important;
+    text-shadow: 0 1px 2px #222a38bb;
+}
+
+/* Estilos para celdas de tablas en modo oscuro */
+body.dark .report-table th,
+body.dark .report-table td {
+    color: #e0e0e0 !important;
+    background: #23252a !important;
+}
+
+/* Títulos de tabla en modo oscuro */
+body.dark .report-table th {
+    color: #69a1e7 !important;
+}
+
+/* Hover en filas de tablas en modo oscuro */
+body.dark .report-table tr:hover,
+body.dark .report-table tbody tr:hover,
+body.dark table tr:hover,
+body.dark table tbody tr:hover {
+    background: #292c34 !important;
+    color: #fff !important;
+}

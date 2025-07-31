@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#3498db">
+    <title>Control de Ahorros e Inversiones</title>
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- Contenedor principal de la app -->
+    <div class="container">
+        <!-- Encabezado principal -->
+        <div class="header">
+            <h1>💰 Control de Ahorros e Inversiones</h1>
+            <p>Sistema integral para el manejo de tus finanzas personales</p>
+            <!-- Botón para cambiar entre modo claro y oscuro -->
+            <div style="margin-top:10px;">
+                <button id="toggleDark" class="btn" style="padding:8px 22px;font-size:15px;min-width:120px;">
+                    🌙 Modo Oscuro
+                </button>
+            </div>
+        </div>
+
+        <!-- Tarjetas resumen de balances principales -->
+        <div class="summary-cards">
+            <div class="card ingresos">
+                <h3>💚 Total Ingresos</h3>
+                <div class="amount" id="totalIngresos">$0.00</div>
+                <p>Dinero ingresado</p>
+            </div>
+            <div class="card egresos">
+                <h3>💸 Total Egresos</h3>
+                <div class="amount" id="totalEgresos">$0.00</div>
+                <p>Dinero gastado</p>
+            </div>
+            <div class="card inversiones">
+                <h3>📈 Total Inversiones</h3>
+                <div class="amount" id="totalInversiones">$0.00</div>
+                <p>Capital invertido</p>
+            </div>
+            <div class="card patrimonio">
+                <h3>🏆 Patrimonio Neto</h3>
+                <div class="amount" id="patrimonioNeto">$0.00</div>
+                <p>Balance total</p>
+            </div>
+        </div>
+
+        <!-- Tabs principales de navegación -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('ingresos', event)">Ingresos</button>
+            <button class="tab" onclick="showTab('egresos', event)">Egresos</button>
+            <button class="tab" onclick="showTab('plazos-fijos', event)">Plazos Fijos</button>
+            <button class="tab" onclick="showTab('inversiones', event)">Inversiones</button>
+            <button class="tab" onclick="showTab('reportes', event)">Reportes</button>
+        </div>
+
+        <div class="content">
+            <!-- SECCIÓN INGRESOS -->
+            <div id="ingresos" class="section active">
+                <h2>💚 Registro de Ingresos</h2>
+                <!-- Formulario para agregar ingresos -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="fechaIngreso" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Concepto</label>
+                        <input type="text" id="conceptoIngreso" placeholder="Ej: Salario, Freelance, etc." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select id="categoriaIngreso">
+                            <option value="Salario">Salario</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Inversiones">Rendimientos</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Monto ($)</label>
+                        <input type="number" id="montoIngreso" step="0.01" placeholder="0.00" required>
+                    </div>
+                </div>
+                <button class="btn btn-success" onclick="agregarIngreso()">➕ Agregar Ingreso</button>
+
+                <!-- Buscador y tabla de ingresos -->
+                <div class="table-search">
+                    <input type="text" id="buscadorIngresos" placeholder="🔍 Buscar ingreso..." oninput="filtrarTabla('ingresos')">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Concepto</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaIngresos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN EGRESOS -->
+            <div id="egresos" class="section">
+                <h2>💸 Registro de Egresos</h2>
+                <!-- Formulario para agregar egresos -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="fechaEgreso" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Concepto</label>
+                        <input type="text" id="conceptoEgreso" placeholder="Ej: Alquiler, Comida, etc." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select id="categoriaEgreso">
+                            <option value="Vivienda">Vivienda</option>
+                            <option value="Alimentación">Alimentación</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Salud">Salud</option>
+                            <option value="Entretenimiento">Entretenimiento</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Monto ($)</label>
+                        <input type="number" id="montoEgreso" step="0.01" placeholder="0.00" required>
+                    </div>
+                </div>
+                <button class="btn btn-danger" onclick="agregarEgreso()">➖ Agregar Egreso</button>
+
+                <!-- Buscador y tabla de egresos -->
+                <div class="table-search">
+                    <input type="text" id="buscadorEgresos" placeholder="🔍 Buscar egreso..." oninput="filtrarTabla('egresos')">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Concepto</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaEgresos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN PLAZOS FIJOS -->
+            <div id="plazos-fijos" class="section">
+                <h2>🏦 Plazos Fijos</h2>
+                <!-- Formulario para agregar plazos fijos -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Fecha de Inicio</label>
+                        <input type="date" id="fechaInicioPF" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Banco/Entidad</label>
+                        <input type="text" id="bancoPF" placeholder="Ej: Banco Nación" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Capital Inicial ($)</label>
+                        <input type="number" id="capitalPF" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tasa Anual (%)</label>
+                        <input type="number" id="tasaPF" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Plazo (días)</label>
+                        <input type="number" id="plazoPF" placeholder="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Vencimiento</label>
+                        <input type="date" id="fechaVencimientoPF" readonly>
+                    </div>
+                </div>
+                <button class="btn" onclick="agregarPlazoFijo()">🏦 Agregar Plazo Fijo</button>
+
+                <!-- Buscador y tabla de plazos fijos -->
+                <div class="table-search">
+                    <input type="text" id="buscadorPlazos" placeholder="🔍 Buscar plazo fijo..." oninput="filtrarTabla('plazos-fijos')">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Banco</th>
+                                <th>Capital</th>
+                                <th>Tasa %</th>
+                                <th>Plazo</th>
+                                <th>Inicio</th>
+                                <th>Vencimiento</th>
+                                <th>Rendimiento</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaPlazos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN INVERSIONES -->
+            <div id="inversiones" class="section">
+                <h2>📈 Registro de Inversiones</h2>
+                <!-- Formulario para agregar inversiones -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="fechaInversion" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Inversión</label>
+                        <select id="tipoInversion">
+                            <option value="Acciones">Acciones</option>
+                            <option value="Bonos">Bonos</option>
+                            <option value="Dólares">Dólares</option>
+                            <option value="Criptomonedas">Criptomonedas</option>
+                            <option value="Commodities">Commodities</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Instrumento/Símbolo</label>
+                        <input type="text" id="instrumentoInversion" placeholder="Ej: AAPL, USD, BTC" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" id="cantidadInversion" step="0.001" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio de Compra</label>
+                        <input type="number" id="precioCompra" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio Actual</label>
+                        <input type="number" id="precioActual" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <button class="btn" onclick="agregarInversion()">📊 Agregar Inversión</button>
+
+                <!-- Buscador y tabla de inversiones -->
+                <div class="table-search">
+                    <input type="text" id="buscadorInversiones" placeholder="🔍 Buscar inversión..." oninput="filtrarTabla('inversiones')">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Instrumento</th>
+                                <th>Cantidad</th>
+                                <th>Precio Compra</th>
+                                <th>Precio Actual</th>
+                                <th>Inversión Total</th>
+                                <th>Valor Actual</th>
+                                <th>Ganancia/Pérdida</th>
+                                <th>% Rendimiento</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaInversiones"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN REPORTES Y GRÁFICOS -->
+            <div id="reportes" class="section">
+                <h2>📊 Reportes y Análisis</h2>
+                <!-- Tabs y panel de gráficos -->
+                <div id="graphics-panel">
+                    <div class="graphics-tabs">
+                        <button class="graphics-tab active" onclick="showGraphicTab('evolucion')">Evolución Mensual</button>
+                        <button class="graphics-tab" onclick="showGraphicTab('categorias')">Por Categoría</button>
+                    </div>
+                    <div id="graphics-content" style="background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(52,152,219,0.07);margin-bottom:22px;">
+                        <!-- Aquí se carga el canvas de los gráficos -->
+                    </div>
+                </div>
+                <!-- Tabs de reportes -->
+                <div class="report-tabs">
+                    <button class="report-tab active" onclick="showReportTab('resumen')">Resumen General</button>
+                    <button class="report-tab" onclick="showReportTab('mensual')">Mensual</button>
+                    <button class="report-tab" onclick="showReportTab('categorias')">Por Categoría</button>
+                    <button class="report-tab" onclick="showReportTab('comparativa')">Comparativa Meses</button>
+                </div>
+
+                <div id="report-content">
+                    <!-- Aquí se cargan los reportes dinámicos -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts principales del sistema -->
+    <script src="chart.min.js"></script>
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
+</script>
+</body>
+</html>
