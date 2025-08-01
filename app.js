@@ -904,7 +904,7 @@ function filtrarTabla(tipo) {
                 <td class="negative">${formatearMoneda(item.monto)}</td>
                 <td><button class="delete-btn" onclick="eliminarEgreso(${item.id})">Eliminar</button></td>
             `;
-        } else if (tipo === 'plazos') {
+        } else if (tipo === 'plazos-fijos') {
             const hoy = new Date();
             const vencimiento = new Date(item.fechaVencimiento);
             const estado = hoy > vencimiento ? 'Vencido' : 'Activo';
